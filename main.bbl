@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+
+\bibitem{Go}
+Ken~Thompson et~al (The Go~Authors).
+\newblock Go (programming language), 2020.
+
+\bibitem{Rocket}
+Abubakar~Nur Khalil.
+\newblock Rocket (programming language), 2020.
+
+\bibitem{BASIC}
+John G. Kemeny \& Thomas~E. Kurtz.
+\newblock Basic (programming language), 2020.
+
+\bibitem{Rust}
+Graydon~Hoare (Mozilla).
+\newblock Rust (programming language), 2020.
+
+\bibitem{CI}
+Robert Nystrom.
+\newblock Crafting interpreters, 2020.
+
+\bibitem{Nim}
+Andreas Rumpf.
+\newblock Nim (programming language), 2020.
+
+\bibitem{Python}
+Guido van Rossum.
+\newblock Python (programming language), 2020.
+
+\bibitem{Cfam}
+Wikipedia.
+\newblock C-family programming languages, 2020.
+
+\bibitem{Langlst}
+Wikipedia.
+\newblock List of programming languages, 2020.
+
+\end{thebibliography}
