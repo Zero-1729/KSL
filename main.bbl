@@ -2,38 +2,49 @@
 
 \bibitem{Go}
 Ken~Thompson et~al (The Go~Authors).
-\newblock Go (programming language), 2020.
+\newblock Go (programming language).
+\newblock \url{https://wikipedia.org/wiki/Go_(programming_language)}, 2020.
 
 \bibitem{Rocket}
 Abubakar~Nur Khalil.
-\newblock Rocket (programming language), 2020.
+\newblock Rocket (programming language).
+\newblock \url{https://github.com/Zero-1729/rocket}, 2020.
 
 \bibitem{BASIC}
 John G. Kemeny \& Thomas~E. Kurtz.
-\newblock Basic (programming language), 2020.
+\newblock Basic (programming language).
+\newblock \url{https://wikipedia.org/wiki/BASIC}, 2020.
 
 \bibitem{Rust}
 Graydon~Hoare (Mozilla).
-\newblock Rust (programming language), 2020.
+\newblock Rust (programming language).
+\newblock \url{https://wikipedia.org/wiki/Rust_(programming_language)}, 2020.
 
 \bibitem{CI}
 Robert Nystrom.
-\newblock Crafting interpreters, 2020.
+\newblock Crafting interpreters.
+\newblock \url{https://craftinginterpreters.com/}, 2020.
 
 \bibitem{Nim}
 Andreas Rumpf.
-\newblock Nim (programming language), 2020.
+\newblock Nim (programming language).
+\newblock \url{https://wikipedia.org/wiki/Nim_(programming_language)}, 2020.
 
 \bibitem{Python}
 Guido van Rossum.
-\newblock Python (programming language), 2020.
+\newblock Python (programming language).
+\newblock \url{https://wikipedia.org/wiki/Python_(programming_language)}, 2020.
 
 \bibitem{Cfam}
 Wikipedia.
-\newblock C-family programming languages, 2020.
+\newblock C-family programming languages.
+\newblock
+  \url{https://wikipedia.org/wiki/List_of_C-family_programming_languages},
+  2020.
 
 \bibitem{Langlst}
 Wikipedia.
-\newblock List of programming languages, 2020.
+\newblock List of programming languages.
+\newblock \url{https://wikipedia.org/wiki/List_of_programming_languages}, 2020.
 
 \end{thebibliography}

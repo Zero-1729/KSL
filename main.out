@@ -1,0 +1,4 @@
+\BOOKMARK [1][-]{section.1}{Structure of the KSL}{}% 1
+\BOOKMARK [1][-]{section.2}{Using the KSL in Source code}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Scanning/Lexing}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Using the KSL for Error reporting}{section.2}% 4
