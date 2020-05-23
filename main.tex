@@ -1,9 +1,18 @@
-\documentclass[a4paper,9pt]{article}
+\documentclass{article}
 
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=cyan,
+    linkcolor=cyan,
+    urlcolor=cyan,
+}
 \usepackage{listings}
+\usepackage[font=small,skip=-8pt,labelfont=bf]{caption}
+\usepackage[a4paper, total={6.16in, 9.96in}]{geometry}
 \usepackage[utf8]{inputenc}
 
 \begin{document}
@@ -31,13 +40,13 @@
 
 \begin{multicols}{2}
 
-\section{Background}
+\section*{Background}
 
 Programming language design and compiler theory have historically been niche fields that garner the attention of only a select few programmers. A common practice for such curious persons is to try and implement some programming language, whether it be a Domain Specific Language, an industry-standard language like Python \cite{Python} or a language they have designed themselves. A natural result from this tinkering is the tendency to change core aspects of the language's behaviour, such as syntax keywords.
 
 Let us assume that the aim of the programmer is to change the language's syntax keywords in order to make it more comfortable to write code, in such a case they would have to install their version of the language's source code on each new machine, or worse, might need to re-implement their solution each time. A simple yet relatable problem, and one which influenced our search for a generic solution.
 
-\section{Introduction}
+\section*{Introduction}
 
 Suppose hypothetically that the syntax keyword for defining functions in the Go Programming Language \cite{Go} was strangely \textit{"baz"}, in order to define some function '\textit{sum}' which takes in two '\textit{integers}' and returns their sum, one would need to write the following:
 
@@ -79,10 +88,10 @@ The former, as the name implies, contains mappings of \textit{plain words}, whic
   \centering
   \begin{verbatim}
     {
-      "LOG" : <TokenType PRINT 0>, 
-      "DEF" : <TokenType FUNC 1>,  
-      "LET" : <TokenType VAR 2>, 
-      ... 
+      "LOG" : <TokenType PRINT 0>,
+      "DEF" : <TokenType FUNC 1>,
+      "LET" : <TokenType VAR 2>,
+      ...
     }
   \end{verbatim}
   \caption{Sample \textit{word-to-keyword} dictionary (\textbf{wk\_Dict}).}
@@ -95,10 +104,7 @@ The latter is populated with mappings of unique values associated with each keyw
   \centering
   \begin{verbatim}
     { 
-      0 : "LOG", 
-      1 : "DEF", 
-      2: "LET", 
-      ... 
+      0 : "LOG", 1 : "DEF", 2: "LET", ...
     }
   \end{verbatim}
   \caption{Sample \textit{value-to-word} dictionary (\textbf{vw\_Dict}).}
@@ -139,7 +145,7 @@ It is important to note that the method of receiving the user-defined keywords i
 
 Now, let's assume that our hypothetical user does not provide a config file and simply wants to use the language's defaults, would that mean our KSL would be unused? Not entirely, we would still use the KSL, however, the only difference would be that \textbf{wk\_Dict} and \textbf{vw\_Dict} would be filled with mappings of the language's default keywords in \textit{plain words} to their corresponding \textit{TokenTypes}, and mappings of these default keywords' \textit{TokenType} values to their plain word representations respectfully.
 
-Proceeding with our example language, the contents of our representation of the language's syntax keywords' \textit{TokenType}, along with our \textbf{wk\_Dict} and \textbf{vw\_Dict} (similar to the content in \textbf{Figs}. ~\ref{fig:wk_Dict} \& ~\ref{fig:vw_Dict}) can be found below: 
+Proceeding with our example language, the contents of our representation of the language's syntax keywords' \textit{TokenType}, along with our \textbf{wk\_Dict} and \textbf{vw\_Dict} (similar to the content in \textbf{Figs}. ~\ref{fig:wk_Dict} \& ~\ref{fig:vw_Dict}) can be found below:
 
 \begin{figure}[ht]
   \begin{verbatim}
@@ -208,7 +214,7 @@ We can therefore properly display the customized keyword's new name in our error
 
 Error reporting is just as easy as that, we simply index the \textbf{vw\_Dict} with the current keyword's value being parsed, interpreted, or even compiled and we will have our plain word representation ready to be used.
 
-\section{Recommendations \& Limitations}
+\section*{Recommendations \& Limitations}
 
 Perhaps in the future, we may be able to extend the KSL to support user-defined syntax operator symbols, i.e changing the binary operator for addition from '\textbf{+}' to '\textbf{@}' for instance.
   
@@ -225,7 +231,7 @@ The following questions should also be considered going forward if we indeed int
     \item Potential code linters for KSL supported languages such as Rocket \cite{Rocket}.
 \end{itemize}
   
-\section{Conclusion}
+\section*{Conclusion}
   
 We barely scratched the surface in terms of what can potentially be achieved by simply organizing user-defined custom keywords using a KSL. There is still a lot to discuss regarding what we have put forward, nevertheless, we have achieved what we set out to do initially: to propose a formal and non-destructive method for adding built-in support for customizing a programming language's syntax keywords by using a data-structure we have termed the KSL.
   
@@ -233,10 +239,10 @@ This elaborate integration of a KSL is intended to give programmers more control
   
 The use of a KSL, as can be inferred, solves the portability problem previously discussed, as it provides a platform-agnostic built-in syntax customization extension.
 
-\section{Acknowledgements}
+\section*{Acknowledgements}
 To Robert Nystrom, for writing the \textit{craftinginterpreters} \cite{CI} Book, without which this work would not have been possible.
 
-\section{Glossary}
+\section*{Glossary}
 
 \begin{itemize}
 	\item \textbf{KSL} - The data structure which holds two separate but related lookup tables with mappings of user-defined syntax keywords to the default syntax keywords, and vice-versa.
