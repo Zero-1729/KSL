@@ -23,7 +23,7 @@
 
 \maketitle
 \begin{abstract}
-  Programming languages have traditionally been designed with a fixed set of rules that guide two things, syntax and semantics.
+  Programming languages have traditionally been designed with a fixed set of rules that guide two things: syntax and semantics.
   As with all languages, whether intended for computers or humans, there is a set of predefined rules that guide the validity of grammatical structure and the meanings derived thereof.
   
   Historically, at least to this point, changing rules such as the valid syntax keywords of a programming language required obtaining and tinkering with its source code, however, this activity remains a niche one carried out by individuals with the know-how.
@@ -80,7 +80,7 @@ An existing implementation of the KSL can be found in the Rocket Programming Lan
 \textbf{Note}: \textit{code snippets are all written in Python}.
 \newline
 
-The KSL itself is a single list containing two (2) Dictionaries in the Python sense or \textit{Associative Arrays} in the Computer Science sense, we shall herein refer to them as the \textit{word-to-keyword} dictionary (\textbf{wk\_Dict}) and the \textit{value-to-word} dictionary (\textbf{vw\_Dict}). 
+The KSL itself is a single list containing two (2) Dictionaries in the Python sense or \textit{Associative Arrays} in the Computer Science sense, which we shall herein refer to as the \textit{word-to-keyword} dictionary (\textbf{wk\_Dict}) and the \textit{value-to-word} dictionary (\textbf{vw\_Dict}). 
 
 The former, as the name implies, contains mappings of \textit{plain words}, which we shall define shortly, to the abstract token representation of the language's syntax keywords. Assuming the language's token representation of the default keywords is in the form \textit{"$<$ TokenType \{keyword\} \{enum value\} $>$"}, then our \textbf{wk\_Dict} can be defined as follows:
 
@@ -103,9 +103,7 @@ The latter is populated with mappings of unique values associated with each keyw
 \begin{figure}[ht]
   \centering
   \begin{verbatim}
-    { 
-      0 : "LOG", 1 : "DEF", 2: "LET", ...
-    }
+    { 0 : "LOG", 1 : "DEF", 2: "LET", ... }
   \end{verbatim}
   \caption{Sample \textit{value-to-word} dictionary (\textbf{vw\_Dict}).}
   \label{fig:vw_Dict}
@@ -141,7 +139,8 @@ We can then allow the user to write a small config file; this file should at the
   \label{fig:ksl-config-file}
 \end{figure}
 
-It is important to note that the method of receiving the user-defined keywords is subject to the discretion of the implementer, but we digress. Ideally, the language's scanner would flag scan errors when custom words are encountered, therefore, in order to allow these newly defined keywords to be recognized properly, it would need to interface with our KSL's \textbf{wk\_Dict}. Specifically, we must first parse the config file to create mappings of the \textit{plain words} their corresponding \textit{TokenType}, which thhe scanner can then use this as its reference table for tokenizing the keywords.
+It is important to note that the method of receiving the user-defined keywords is subject to the discretion of the implementer, but we digress. Ideally, the language's scanner would flag scan errors when custom words are encountered, therefore, in order to allow these newly defined keywords to be recognized properly, it would need to interface with our KSL's \textbf{wk\_Dict}. Specifically, we must first parse the config file to create mappings of the \textit{plain words} 
+to their corresponding \textit{TokenType}, which thhe scanner can then use this as its reference table for tokenizing the keywords.
 
 Now, let's assume that our hypothetical user does not provide a config file and simply wants to use the language's defaults, would that mean our KSL would be unused? Not entirely, we would still use the KSL, however, the only difference would be that \textbf{wk\_Dict} and \textbf{vw\_Dict} would be filled with mappings of the language's default keywords in \textit{plain words} to their corresponding \textit{TokenTypes}, and mappings of these default keywords' \textit{TokenType} values to their plain word representations respectfully.
 
@@ -190,7 +189,7 @@ Now that we are through tokenizing we would have to consider error reporting. Ou
     ParseError: 'PRINT' expected ';' after expression.
 \end{verbatim}
 
-To avoid this inconsistency we need to also ensure error reporting is handled with the appropriate current valid keyword, whether user-defined or default. This is where our \textbf{vw\_Dict} comes in handy. We simply look up the value of the language's keyword \textit{TokenType} that is reporting the error in our \textbf{vw\_Dict}, which would, in turn, return the appropriate plain word representation of that keyword, thus providing the perfect illusion to the user that their custom keywords are truly integrated while maintaining a uniform internal structure in the language's code. This method could be adopted for all errors to be reported no matter the pass level.
+To avoid this inconsistency we need to also ensure error reporting is handled with the appropriate current valid keyword, whether user-defined or default. This is where our \textbf{vw\_Dict} comes in handy. We simply look up the value of the language's keyword \textit{TokenType} that is reporting the error in our \textbf{vw\_Dict}, which would return the appropriate plain word representation of that keyword, thus providing the perfect illusion to the user that their custom keywords are truly integrated while maintaining a uniform internal structure in the language's code. This method could be adopted for all errors to be reported no matter the pass level.
 
 To further shed light on this, let us provide a contrived example of some error reporting code in a language's parser:
 
@@ -203,8 +202,7 @@ To further shed light on this, let us provide a contrived example of some error 
       # ... more parsing code
 
       # Assuming semicolon (';') is a token.
-      consume(TokenType.SEMICOL, f"'{print_lexeme}' 
-                    expected ';' after expression")
+      consume(TokenType.SEMICOL, f"'{print_lexeme}' expected ';' after expression")
   \end{verbatim}
   \caption{Sample Parse Error code using a KSL.}
   \label{fig:parse-error-code}
@@ -212,20 +210,20 @@ To further shed light on this, let us provide a contrived example of some error 
 
 We can therefore properly display the customized keyword's new name in our error reporting, and hence provides us with the consistency we need.
 
-Error reporting is just as easy as that, we simply index the \textbf{vw\_Dict} with the current keyword's value being parsed, interpreted, or even compiled and we will have our plain word representation ready to be used.
+Error reporting is just as easy as that: indexing the \textbf{vw\_Dict} with the current keyword's value being parsed, interpreted, or even compiled, and receiving the plain word representation.
 
 \section*{Recommendations \& Limitations}
 
-Perhaps in the future, we may be able to extend the KSL to support user-defined syntax operator symbols, i.e changing the binary operator for addition from '\textbf{+}' to '\textbf{@}' for instance.
+Perhaps in the future we may be able to extend the KSL to support user-defined syntax operator symbols, i.e changing the binary operator for addition from '\textbf{+}' to '\textbf{@}' for instance.
   
-Another interesting use-case would be support for custom syntax comment symbol definitions, i.e changing the single-line comment symbol from '\textbf{\#}' to '\textbf{$\%$}', or multi-line comments from '\textbf{/*}' \& '\textbf{*}/' to '\textbf{"""}' \& '\textbf{"""}'.
+Another interesting use-case would be support for custom syntax comment symbol delimiters, i.e changing the single-line comment symbol from '\textbf{\#}' to '\textbf{$\%$}', or multi-line comments from '\textbf{/*}' \& '\textbf{*}/' to '\textbf{"""}' \& '\textbf{"""}'.
   
 The following questions should also be considered going forward if we indeed intend to standardize this solution, or at the very least improve it:
   
 \begin{itemize}
     \item Explore other methods for accepting these user-defined customizations, e.g. in a config file as discussed or possibly a JSON file, in a REPL session, or at the beginning of a source file.
     \item Optimal methods for quickly scanning and parsing the KSL after a customization method has been chosen.
-    \item Performance optimizations for, and potential trade-offs of including the KSL in a programming language.
+    \item Performance optimizations for and potential trade-offs of including the KSL in a programming language.
     \item Pitfalls in our current design of the KSL.
     \item Other potential approaches towards providing built-in support for customizing language syntax keywords besides using a KSL.
     \item Potential code linters for KSL supported languages such as Rocket \cite{Rocket}.
@@ -233,14 +231,14 @@ The following questions should also be considered going forward if we indeed int
   
 \section*{Conclusion}
   
-We barely scratched the surface in terms of what can potentially be achieved by simply organizing user-defined custom keywords using a KSL. There is still a lot to discuss regarding what we have put forward, nevertheless, we have achieved what we set out to do initially: to propose a formal and non-destructive method for adding built-in support for customizing a programming language's syntax keywords by using a data-structure we have termed the KSL.
+We have barely scratched the surface in terms of what can potentially be achieved by simply organizing user-defined custom keywords using a KSL. There is still a lot to discuss regarding what we have put forward, nevertheless, we have achieved what we set out to do initially: to propose a formal and non-destructive method for adding built-in support for customizing a programming language's syntax keywords by using a data-structure we have termed the KSL.
   
 This elaborate integration of a KSL is intended to give programmers more control and freedom over the syntactic restrictions of a language, such as its syntax keywords.
   
 The use of a KSL, as can be inferred, solves the portability problem previously discussed, as it provides a platform-agnostic built-in syntax customization extension.
 
 \section*{Acknowledgements}
-To Robert Nystrom, for writing the \textit{craftinginterpreters} \cite{CI} Book, without which this work would not have been possible.
+To Robert Nystrom, for writing the \textit{craftinginterpreters} \cite{CI} book, without which this work would not have been possible.
 
 \section*{Glossary}
 
